@@ -2,7 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-const app = express();
+const allowedOrigins = [
+  'http://localhost:4200',
+  'https://desafio-trilha-front-end-9v9d.vercel.app'
+];
+
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -13,7 +17,6 @@ app.use(cors({
   },
   credentials: true
 }));
-app.use(bodyParser.json());
 
 // Simula banco de dados
 const agendamentos = [
