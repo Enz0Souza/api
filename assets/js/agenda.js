@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 
 const app = express();
 app.use(cors({
-  origin: ['https://seu-site.vercel.app', 'http://localhost:4200'],
+  origin: ['https://desafio-trilha-front-end-9v9d.vercel.app', 'http://localhost:4200'],
   credentials: true
 }));
 app.use(bodyParser.json());
