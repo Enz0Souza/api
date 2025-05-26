@@ -4,7 +4,13 @@ import bodyParser from 'body-parser';
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Não permitido pelo CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(bodyParser.json());
