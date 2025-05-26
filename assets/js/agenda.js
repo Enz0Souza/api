@@ -2,21 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-const allowedOrigins = [
-  'http://localhost:4200',
-  'https://desafio-trilha-front-end-9v9d.vercel.app'
-];
-
+const app = express();
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Não permitido pelo CORS'));
-    }
-  },
+  origin: ['https://seu-site.vercel.app', 'http://localhost:4200'],
   credentials: true
 }));
+app.use(bodyParser.json());
 
 // Simula banco de dados
 const agendamentos = [
