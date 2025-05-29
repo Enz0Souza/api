@@ -55,6 +55,17 @@ app.post('/api/agendamentos', authMiddleware, (req, res) => {
     return res.status(400).json({ error: 'Campos obrigatórios: data, hora, especie' });
   }
 
+  // Validação da data
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas a data
+
+  const dataAgendamento = new Date(data);
+  dataAgendamento.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas a data
+
+  if (dataAgendamento < hoje) {
+    return res.status(400).json({ error: 'Não é possível agendar para datas passadas' });
+  }
+
   const novo = {
     id: agendamentos.length + 1,
     userId: req.userId,
